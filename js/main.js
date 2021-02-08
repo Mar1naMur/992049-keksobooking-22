@@ -19,7 +19,6 @@ function randNumber(from, to) {
   }
   return Math.floor(Math.random() * (Math.floor(to) - Math.floor(from) + 1)) + Math.floor(from);
 }
-
 let resultFinal = 0;
 
 // Кексобукинг
@@ -36,14 +35,11 @@ function randNumberToFixed(from, to, quantity) {
           'Значение from ' + from + ' не должно быть больше to ' + to
           : 'Значение from ' + from + ' не должно быть равно to ' + to
   }
-
   let result = Math.random() * (to - from) + from;
 
   return Number(result.toFixed(quantity));
 }
-
 let resultFinalToFixed = 0;
-
 try {
   resultFinal = randNumber(2.6, 5);
   resultFinalToFixed = randNumberToFixed(3.6, '6.7', 10);
@@ -51,10 +47,8 @@ try {
 catch (error) {
   console.error('Что-то пошло не так.', error);
 }
-
 console.log('ДЗ второе:', randNumber(2.6, 5));
 console.log('ДЗ второе - Кексобукинг:', randNumberToFixed(3.6, 6.7, 10));
-
 // console.log('ДЗ второе:', randNumber(10, 17));
 // console.log('ДЗ второе:', randNumber(2, 1));
 // console.log('ДЗ второе:', randNumber(-1, 7));
