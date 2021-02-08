@@ -37,3 +37,8 @@ function randNumberToFixed(from, to, quantity) {
 
   return Number(result.toFixed(quantity));
 }
+
+// eslint-disable-next-line
+console.log(1, randNumber(1, 10))
+// eslint-disable-next-line
+console.log(1, randNumberToFixed(1.1111, 10.2222, 3))
