@@ -4,13 +4,9 @@ function randNumber(from, to) {
     throw new Error('Ошибка! Введите число.')
   }
   // если первый параметр меньше нуля, то преобразовать в положительное число
-  if (from < 0) {
-    from *= -1;
-  }
+  if (from < 0) { from *= -1; }
   // если второй параметр меньше нуля, то преобразовать в положительное число
-  if (to < 0) {
-    to *= -1;
-  }
+  if (to < 0) { to *= -1; }
   if (from >= to) {
     return from > to ?
       'Значение from ' + from + ' не должно быть больше to ' + to
@@ -18,7 +14,6 @@ function randNumber(from, to) {
   }
   return Math.floor(Math.random() * (Math.floor(to) - Math.floor(from) + 1)) + Math.floor(from);
 }
-
 // Кексобукинг
 function randNumberToFixed(from, to, quantity) {
   if (typeof from !== 'number' || typeof to !== 'number') {
@@ -34,11 +29,13 @@ function randNumberToFixed(from, to, quantity) {
       : 'Значение from ' + from + ' не должно быть равно to ' + to
   }
   let result = Math.random() * (to - from) + from;
-
   return Number(result.toFixed(quantity));
 }
 
-// eslint-disable-next-line
-console.log(1, randNumber(1, 10))
-// eslint-disable-next-line
-console.log(1, randNumberToFixed(1.1111, 10.2222, 3))
+try {
+  randNumber(2.6, 5);
+  randNumberToFixed(3.6, '6.7', 10);
+}
+catch (error) {
+  console.error('Что-то пошло не так.', error);
+}
