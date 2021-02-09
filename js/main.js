@@ -1,41 +1,28 @@
 function randNumber(from, to) {
-  // Проверка на тип данных: вывести ошибку, если это не число
-  if (typeof from !== 'number' || typeof to !== 'number') {
-    throw new Error('Ошибка! Введите число.')
-  }
-  // если первый параметр меньше нуля, то преобразовать в положительное число
-  if (from < 0) { from *= -1; }
-  // если второй параметр меньше нуля, то преобразовать в положительное число
-  if (to < 0) { to *= -1; }
-  if (from >= to) {
-    return from > to ?
-      'Значение from ' + from + ' не должно быть больше to ' + to
-      : 'Значение from ' + from + ' не должно быть равно to ' + to
-  }
-  return Math.floor(Math.random() * (Math.floor(to) - Math.floor(from) + 1)) + Math.floor(from);
-}
-// Кексобукинг
-function randNumberToFixed(from, to, quantity) {
-  if (typeof from !== 'number' || typeof to !== 'number') {
-    throw new Error('Ошибка! Введите число.')
+  if (isNaN(from) || isNaN(to)) {
+    throw new Error('Ошибка! Некорректный тип аргумента.')
   }
   if (from < 0 || to < 0) {
     throw new Error('Ошибка! Некорректный диапазон.')
   }
-
   if (from >= to) {
     return from > to ?
-      'Значение from ' + from + ' не должно быть больше to ' + to
-      : 'Значение from ' + from + ' не должно быть равно to ' + to
+      'Значение from ' + from + ' не должно быть больше to ' + to : from;
   }
-  let result = Math.random() * (to - from) + from;
-  return Number(result.toFixed(quantity));
+  return Math.floor(Math.random() * (Math.floor(to) - Math.floor(from) + 1)) + Math.floor(from);
 }
-
+function randNumberToFixed(from, to, precision) {
+  if (isNaN(precision) || precision < 0) {
+    throw new Error('Ошибка! Некорректный тип аргумента.')
+  }
+  const QUANTITY = Math.pow(10, precision);
+  return randNumber(from * QUANTITY, to * QUANTITY) / QUANTITY;
+}
 try {
-  randNumber(2.6, 5);
-  randNumberToFixed(3.6, '6.7', 10);
-}
-catch (error) {
+  randNumber(6, 5);
+  randNumberToFixed(4.6, {}, 3);
+} catch (error) {
+  /* eslint-disable no-console*/
   console.error('Что-то пошло не так.', error);
+  /*eslint-enable no-console*/
 }
