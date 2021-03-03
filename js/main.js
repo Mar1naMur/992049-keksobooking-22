@@ -52,7 +52,7 @@ const createObject = () => {
 
   return {
     author: {
-      avatar: getAvatar()
+      avatar: getAvatar(),
     },
     offer: {
       title: 'Предложение',
@@ -65,12 +65,12 @@ const createObject = () => {
       checkout: getRandomElement(TIME),
       features: getRandomElementFeatures(ROOM_FEATURES),
       description: 'Описание',
-      photos: getRandomElementFeatures(PHOTO_GALLERY)
+      photos: getRandomElementFeatures(PHOTO_GALLERY),
     },
     location: {
       x: x,
-      y: y
-    }
+      y: y,
+    },
   }
 };
 
@@ -82,4 +82,3 @@ const generateObjects = objectQuantity => {
   }
   return resultArray;
 };
-console.log(generateObjects(10));
