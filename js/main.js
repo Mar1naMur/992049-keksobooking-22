@@ -82,3 +82,5 @@ const generateObjects = objectQuantity => {
   }
   return resultArray;
 };
+
+generateObjects(10);
