@@ -26,14 +26,14 @@ function randNumberToFixed(from, to, precision) {
 
 function getRandomElement(typeArr) {
   return typeArr[randNumber(0, typeArr.length - 1)];
-};
+}
 
 const getRandomElements = (arr) => {
   const cloneArr = arr.slice();
   const randomSort = () => Math.floor(Math.random() * 3) - 1;
 
   return cloneArr.sort(randomSort).slice(0, randNumber(1, cloneArr.length));
-};
+}
 
 const getAvatar = (number) => {
   const avatarID = `${number}`.padStart(2, '0');
@@ -67,7 +67,7 @@ const createObject = () => {
       y: Y,
     },
   }
-};
+}
 
 const generateObjects = objectQuantity => {
   const resultArray = []
@@ -76,6 +76,6 @@ const generateObjects = objectQuantity => {
     resultArray.push(createObject())
   }
   return resultArray;
-};
+}
 
-generateObjects(10);
+generateObjects(10)
