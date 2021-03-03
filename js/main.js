@@ -1,3 +1,8 @@
+const TYPE_FLOOR = ['palace', 'flat', 'house', 'bungalow']
+const TIME = ['12:00', '13:00', '14:00']
+const ROOM_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner']
+const PHOTO_GALLERY = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg']
+
 function randNumber(from, to) {
   if (isNaN(from) || isNaN(to)) {
     throw new Error('Ошибка! Некорректный тип аргумента.')
@@ -18,58 +23,48 @@ function randNumberToFixed(from, to, precision) {
   const QUANTITY = Math.pow(10, precision);
   return randNumber(from * QUANTITY, to * QUANTITY) / QUANTITY;
 }
-try {
-  randNumber(4, 5);
-  randNumberToFixed(4.6, 6, 3);
-} catch (error) {
-  /* eslint-disable no-console*/
-  console.error('Что-то пошло не так.', error);
-  /*eslint-enable no-console*/
-}
-// homework3
-const TYPE_FLOOR = ['palace', 'flat', 'house', 'bungalow']
-const TIME = ['12:00', '13:00', '14:00']
-const ROOM_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner']
-const PHOTO_GALLERY = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg']
 
-const getRandomElement = typeArr => typeArr[Math.floor(Math.random() * typeArr.length)];
-
-const getRandomElementFeatures = featuresArr => {
-  const featuresArrIndex = [];
-  const featuresArrLenght = randNumber(1, featuresArr.length);
-
-  for (let i = 0; i < featuresArrLenght; i++) {
-    featuresArrIndex.push(featuresArr[i])
-  }
-  return featuresArrIndex;
+function getRandomElement(typeArr) {
+  return typeArr[randNumber(0, typeArr.length - 1)];
 };
 
-const getAvatar = () => 'img/avatars/user/0' + randNumber(1, 8) + '.png';
+const getRandomElements = (arr) => {
+  const cloneArr = arr.slice();
+  const randomSort = () => Math.floor(Math.random() * 3) - 1;
+
+  return cloneArr.sort(randomSort).slice(0, randNumber(1, cloneArr.length));
+};
+
+const getAvatar = (number) => {
+  const avatarID = `${number}`.padStart(2, '0');
+  return `img/avatars/user/${avatarID}.png`
+}
 
 const createObject = () => {
-  const x = randNumberToFixed(35.65000, 35.70000, 5)
-  const y = randNumberToFixed(139.70000, 139.80000, 5)
+  const X = randNumberToFixed(35.65000, 35.70000, 5)
+  const Y = randNumberToFixed(139.70000, 139.80000, 5)
+  const CHECK_TIME = getRandomElement(TIME)
 
   return {
     author: {
-      avatar: getAvatar(),
+      avatar: getAvatar(randNumber(1, 11)),
     },
     offer: {
       title: 'Предложение',
-      address: `${x}, ${y}`,
+      address: `${X}, ${Y}`,
       price: randNumber(1000, 5000),
       type: getRandomElement(TYPE_FLOOR),
       rooms: randNumber(1, 5),
       guests: randNumber(1, 10),
-      checkin: getRandomElement(TIME),
-      checkout: getRandomElement(TIME),
-      features: getRandomElementFeatures(ROOM_FEATURES),
+      checkin: CHECK_TIME,
+      checkout: CHECK_TIME,
+      features: getRandomElements(ROOM_FEATURES),
       description: 'Описание',
-      photos: getRandomElementFeatures(PHOTO_GALLERY),
+      photos: getRandomElements(PHOTO_GALLERY),
     },
     location: {
-      x: x,
-      y: y,
+      x: X,
+      y: Y,
     },
   }
 };
